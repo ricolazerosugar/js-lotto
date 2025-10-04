@@ -6,9 +6,7 @@ import { drawLottoUI, drawLottoOutputUI } from "./console-ui/console-ui.js";
 import lotto from "./lotto/lotto.js";
 
 async function lottoProcess(store) {
-  const lottos = new lotto.LottoStore(lotto.LOTTO_PRICE, lotto.Lotto).buyLottos(
-    store.get("purchaseAmount")
-  );
+  const lottos = store.get("lottos");
   const winningLotto = new lotto.WinningLotto(
     new lotto.Lotto(store.get("winningLottoNumber")),
     new lotto.BonusLotto(store.get("bonusNumber"))

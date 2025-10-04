@@ -15,6 +15,7 @@ const purchaseAmountComponent = async (store) => {
 };
 
 const winningLottoNumberComponent = async (store) => {
+  console.log("");
   const winningLottoNumberString = await inputStringWithPlaceholder(
     "> 당첨 번호를 입력해 주세요. "
   );
@@ -23,6 +24,7 @@ const winningLottoNumberComponent = async (store) => {
 };
 
 const bonusNumberComponent = async (store) => {
+  console.log("");
   const bonusNumberString = await inputStringWithPlaceholder(
     "> 보너스 번호를 입력해 주세요. "
   );
@@ -30,10 +32,20 @@ const bonusNumberComponent = async (store) => {
   store.set("bonusNumber", bonusNumber);
 };
 
+const lottosComponent = async (store) => {
+  const lottos = store.get("lottos");
+  console.log(`${lottos.length}개를 구매했습니다.`);
+  console.log("구입한 로또 번호:");
+  lottos.forEach((lotto) => {
+    console.log(lotto.getNumbers());
+  });
+};
+
 const winningReportComponent = async (store) => {
   const reportInfo = store.get("winningReport");
   const prizeList = store.get("prizeList");
 
+  console.log("");
   console.log("당첨 통계");
   console.log("--------------------");
 
@@ -54,4 +66,5 @@ export {
   winningLottoNumberComponent,
   bonusNumberComponent,
   winningReportComponent,
+  lottosComponent,
 };
