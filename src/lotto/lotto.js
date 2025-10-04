@@ -29,7 +29,8 @@ class CommonLotto {
   generateLottoNumbers(numberCount) {
     return [...CommonLotto.LOTTO_NUMBER_RANGE]
       .sort(() => Math.random() - 0.5)
-      .splice(0, numberCount);
+      .slice(0, numberCount)
+      .sort((a, b) => a - b);
   }
 
   validateNumbers(lottoNumbers) {
