@@ -26,6 +26,17 @@ describe("로또 객체 비즈니스 로직 테스트", () => {
     expect(isValidRangeLottoNumbers).toBe(true);
   });
 
+  it("로또 번호는 오름차순으로 정렬된다.", () => {
+    //given
+    const lottoNumbers = [3, 1, 4, 2, 5, 6];
+    const myLotto = new lotto.Lotto(lottoNumbers);
+    //when
+    const lottoSortedNumbers = lottoNumbers.toSorted((a, b) => a - b);
+
+    //then
+    expect(myLotto.getNumbers()).toEqual(lottoSortedNumbers);
+  });
+
   it("당첨 번호와 보너스 번호를 저장한다.", () => {
     //given
     const winningNumbers = [1, 2, 3, 4, 5, 6];
@@ -35,8 +46,8 @@ describe("로또 객체 비즈니스 로직 테스트", () => {
     const bonusLotto = new lotto.BonusLotto(bonusNumber);
     const winningLotto = new lotto.WinningLotto(myLotto, bonusLotto);
     //then
-    expect(winningLotto.getNumbers()).toBe(winningNumbers);
-    expect(winningLotto.getBonusNumber()).toBe(bonusNumber);
+    expect(winningLotto.getNumbers()).toEqual(winningNumbers);
+    expect(winningLotto.getBonusNumber()).toEqual(bonusNumber);
   });
 
   it("사용자가 구매한 로또 번호와 당첨 번호를 비교하여 당첨 개수, 보너스 번호 당첨 여부를 반환한다.", () => {

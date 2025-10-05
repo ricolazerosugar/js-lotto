@@ -12,7 +12,7 @@ class CommonLotto {
     this.#numbers = lottoNumbers;
   }
   getNumbers() {
-    return this.#numbers;
+    return this.#numbers.toSorted((a, b) => a - b);
   }
 
   #validateLottoNumbers(lottoNumbers) {
@@ -29,8 +29,7 @@ class CommonLotto {
   generateLottoNumbers(numberCount) {
     return [...CommonLotto.LOTTO_NUMBER_RANGE]
       .sort(() => Math.random() - 0.5)
-      .slice(0, numberCount)
-      .sort((a, b) => a - b);
+      .slice(0, numberCount);
   }
 
   validateNumbers(lottoNumbers) {
