@@ -6,7 +6,7 @@ class CommonLotto {
   ];
   #numbers = [];
   constructor(lottoNumbers = this.generateLottoNumbers()) {
-    if (!this.#validateLottoNumbers(lottoNumbers)) {
+    if (!CommonLotto.validateLottoNumbers(lottoNumbers)) {
       throw new Error("유효하지 않은 로또 번호입니다.");
     }
     this.#numbers = lottoNumbers;
@@ -15,14 +15,14 @@ class CommonLotto {
     return this.#numbers.toSorted((a, b) => a - b);
   }
 
-  #validateLottoNumbers(lottoNumbers) {
+  static validateLottoNumbers(lottoNumbers) {
     return (
       Array.isArray(lottoNumbers) &&
-      this.validateNumbers(lottoNumbers) &&
-      this.isUniqueNumbers(lottoNumbers)
+      CommonLotto.validateNumbers(lottoNumbers) &&
+      CommonLotto.isUniqueNumbers(lottoNumbers)
     );
   }
-  isUniqueNumbers(numbers) {
+  static isUniqueNumbers(numbers) {
     return new Set(numbers).size === numbers.length;
   }
 
@@ -32,11 +32,11 @@ class CommonLotto {
       .slice(0, numberCount);
   }
 
-  validateNumbers(lottoNumbers) {
-    return lottoNumbers.every((number) => this.validateNumber(number));
+  static validateNumbers(lottoNumbers) {
+    return lottoNumbers.every((number) => CommonLotto.validateNumber(number));
   }
 
-  validateNumber(number) {
+  static validateNumber(number) {
     return CommonLotto.LOTTO_NUMBER_RANGE.includes(number);
   }
 }

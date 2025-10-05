@@ -1,35 +1,68 @@
 import {
   purchaseAmountValidator,
   lottoNumberValidator,
+  restartCommandValidator,
+  ValidateError,
 } from "../validator/index.js";
 import lotto from "../../lotto/lotto.js";
 import { inputStringWithPlaceholder } from "../input/index.js";
 
 const purchaseAmountComponent = async (store) => {
-  const purchaseAmountString = await inputStringWithPlaceholder(
-    "> 구입금액을 입력해 주세요. "
-  );
-  const purchaseAmount = purchaseAmountValidator(purchaseAmountString);
-
-  store.set("purchaseAmount", purchaseAmount);
+  while (true) {
+    try {
+      const purchaseAmountString = await inputStringWithPlaceholder(
+        "> 구입금액을 입력해 주세요. "
+      );
+      const purchaseAmount = purchaseAmountValidator(purchaseAmountString);
+      store.set("purchaseAmount", purchaseAmount);
+      return;
+    } catch (error) {
+      console.log(error.message);
+      if (!(error instanceof ValidateError)) {
+        throw error;
+      }
+    }
+  }
 };
 
 const winningLottoNumberComponent = async (store) => {
-  console.log("");
-  const winningLottoNumberString = await inputStringWithPlaceholder(
-    "> 당첨 번호를 입력해 주세요. "
-  );
-  const winningLottoNumber = lottoNumberValidator(winningLottoNumberString);
-  store.set("winningLottoNumber", winningLottoNumber);
+  while (true) {
+    try {
+      console.log("");
+      const winningLottoNumberString = await inputStringWithPlaceholder(
+        "> 당첨 번호를 입력해 주세요. "
+      );
+      const winningLottoNumber = lottoNumberValidator(winningLottoNumberString);
+      store.set("winningLottoNumber", winningLottoNumber);
+      return;
+    } catch (error) {
+      console.log("winningLottoNumber Component error");
+      console.log(error.message);
+      if (!(error instanceof ValidateError)) {
+        throw error;
+      }
+    }
+  }
 };
 
 const bonusNumberComponent = async (store) => {
-  console.log("");
-  const bonusNumberString = await inputStringWithPlaceholder(
-    "> 보너스 번호를 입력해 주세요. "
-  );
-  const bonusNumber = lottoNumberValidator(bonusNumberString);
-  store.set("bonusNumber", bonusNumber);
+  while (true) {
+    try {
+      console.log("");
+      const bonusNumberString = await inputStringWithPlaceholder(
+        "> 보너스 번호를 입력해 주세요. "
+      );
+      const bonusNumber = lottoNumberValidator(bonusNumberString);
+      store.set("bonusNumber", bonusNumber);
+      return;
+    } catch (error) {
+      console.log("bonusNumber Component error");
+      console.log(error.message);
+      if (!(error instanceof ValidateError)) {
+        throw error;
+      }
+    }
+  }
 };
 
 const lottosComponent = async (store) => {
@@ -61,10 +94,29 @@ const winningReportComponent = async (store) => {
   console.log(`총 수익률은 ${reportInfo.winningRate}%입니다.`);
 };
 
+const restartCommandComponent = async (store) => {
+  while (true) {
+    try {
+      const restartCommandString = await inputStringWithPlaceholder(
+        "> 다시 시작하시겠습니까? (y/n) "
+      );
+      const restartCommand = restartCommandValidator(restartCommandString);
+      store.set("restartCommand", restartCommand);
+      return;
+    } catch (error) {
+      console.log(error.message);
+      if (!(error instanceof ValidateError)) {
+        throw error;
+      }
+    }
+  }
+};
+
 export {
   purchaseAmountComponent,
   winningLottoNumberComponent,
   bonusNumberComponent,
   winningReportComponent,
   lottosComponent,
+  restartCommandComponent,
 };

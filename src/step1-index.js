@@ -2,7 +2,11 @@
  * step 1의 시작점이 되는 파일입니다.
  * 브라우저 환경에서 사용하는 css 파일 등을 불러올 경우 정상적으로 빌드할 수 없습니다.
  */
-import { drawLottoUI, drawLottoOutputUI } from "./console-ui/console-ui.js";
+import {
+  drawLottoUI,
+  drawLottoOutputUI,
+  restartCommandUI,
+} from "./console-ui/console-ui.js";
 import lotto from "./lotto/lotto.js";
 
 async function lottoProcess(store) {
@@ -26,10 +30,21 @@ async function lottoProcess(store) {
 
 const main = async () => {
   try {
-    const store = new Map();
-    await drawLottoUI(store);
-    await lottoProcess(store);
-    await drawLottoOutputUI(store);
+    while (true) {
+      try {
+        const store = new Map();
+        await drawLottoUI(store);
+        await lottoProcess(store);
+        await drawLottoOutputUI(store);
+        await restartCommandUI(store);
+        if (store.get("restartCommand") === "n") {
+          return;
+        }
+      } catch (error) {
+        console.error(error.message);
+        process.exit(1);
+      }
+    }
   } catch (error) {
     console.error(error.message);
     process.exit(1);

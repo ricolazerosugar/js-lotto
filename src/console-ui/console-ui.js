@@ -4,6 +4,7 @@ import {
   bonusNumberComponent,
   winningReportComponent,
   lottosComponent,
+  restartCommandComponent,
 } from "./component/index.js";
 
 import lotto from "../lotto/lotto.js";
@@ -23,4 +24,8 @@ async function drawLottoOutputUI(store) {
   await winningReportComponent(store);
 }
 
-export { drawLottoUI, drawLottoOutputUI };
+async function restartCommandUI(store) {
+  await restartCommandComponent(store);
+}
+
+export { drawLottoUI, drawLottoOutputUI, restartCommandUI };
