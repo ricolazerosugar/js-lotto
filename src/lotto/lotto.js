@@ -5,7 +5,7 @@ class CommonLotto {
     ...new Array(45).fill(0).map((_, index) => index + 1),
   ];
   #numbers = [];
-  constructor(lottoNumbers = this.generateLottoNumbers()) {
+  constructor(lottoNumbers = CommonLotto.generateLottoNumbers()) {
     if (!CommonLotto.validateLottoNumbers(lottoNumbers)) {
       throw new Error("유효하지 않은 로또 번호입니다.");
     }
@@ -26,7 +26,7 @@ class CommonLotto {
     return new Set(numbers).size === numbers.length;
   }
 
-  generateLottoNumbers(numberCount) {
+  static generateLottoNumbers(numberCount) {
     return [...CommonLotto.LOTTO_NUMBER_RANGE]
       .sort(() => Math.random() - 0.5)
       .slice(0, numberCount);
@@ -43,23 +43,43 @@ class CommonLotto {
 
 class Lotto extends CommonLotto {
   static #LOTTO_NUMBER_COUNT = 6;
-  constructor(lottoNumbers) {
+  constructor(lottoNumbers = Lotto.generateLottoNumbers()) {
+    if (!Lotto.validateLottoNumbers(lottoNumbers)) {
+      throw new Error("유효하지 않은 로또 번호입니다.");
+    }
     super(lottoNumbers);
   }
 
-  generateLottoNumbers() {
+  static generateLottoNumbers() {
     return super.generateLottoNumbers(Lotto.#LOTTO_NUMBER_COUNT);
+  }
+
+  static validateLottoNumbers(lottoNumbers) {
+    return (
+      super.validateLottoNumbers(lottoNumbers) &&
+      lottoNumbers.length === Lotto.#LOTTO_NUMBER_COUNT
+    );
   }
 }
 
 class BonusLotto extends CommonLotto {
   static #LOTTO_NUMBER_COUNT = 1;
 
-  constructor(lottoNumbers) {
+  constructor(lottoNumbers = BonusLotto.generateLottoNumbers()) {
+    if (!BonusLotto.validateLottoNumbers(lottoNumbers)) {
+      throw new Error("유효하지 않은 로또 번호입니다.");
+    }
     super(lottoNumbers);
   }
-  generateLottoNumbers() {
+  static generateLottoNumbers() {
     return super.generateLottoNumbers(BonusLotto.#LOTTO_NUMBER_COUNT);
+  }
+
+  static validateLottoNumbers(lottoNumbers) {
+    return (
+      super.validateLottoNumbers(lottoNumbers) &&
+      lottoNumbers.length === BonusLotto.#LOTTO_NUMBER_COUNT
+    );
   }
 }
 

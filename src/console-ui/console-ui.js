@@ -5,7 +5,6 @@ import {
   winningReportComponent,
   lottosComponent,
   restartCommandComponent,
-  componentErrorHandler,
 } from "./component/index.js";
 
 import lotto from "../lotto/lotto.js";

@@ -50,6 +50,16 @@ describe("로또 객체 비즈니스 로직 테스트", () => {
     expect(winningLotto.getBonusNumber()).toEqual(bonusNumber);
   });
 
+  it("당첨 번호와 보너스 번호를 저장한다. 당첨번호는 6개, 보너스 번호는 1개를 생성한다.", () => {
+    //given
+    const winningNumbers = [1, 2, 3, 4, 5];
+    const bonusNumber = [7];
+    //when && then
+    expect(() => {
+      const myLotto = new lotto.Lotto(winningNumbers);
+    }).toThrow(new Error("유효하지 않은 로또 번호입니다."));
+  });
+
   it("사용자가 구매한 로또 번호와 당첨 번호를 비교하여 당첨 개수, 보너스 번호 당첨 여부를 반환한다.", () => {
     //given
     const winningNumbers = [1, 2, 3, 4, 5, 6];

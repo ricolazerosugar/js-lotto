@@ -20,6 +20,25 @@ const lottoNumberValidator = (inputString) => {
   }
 };
 
+const bonusNumberValidator = (inputString) => {
+  try {
+    const validatedValue = inputString
+      .split(",")
+      .map((number) => parseInt(number));
+    if (validatedValue.some((number) => isNaN(number))) {
+      throw new ValidateError("invalid value: 올바르지 않은 값 입니다.");
+    }
+
+    if (!lotto.BonusLotto.validateLottoNumbers(validatedValue)) {
+      throw new ValidateError("invalid value: 올바르지 않은 로또 번호 입니다.");
+    }
+
+    return validatedValue;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const purchaseAmountValidator = (inputString) => {
   try {
     const purchaseAmount = parseInt(inputString);
@@ -41,6 +60,7 @@ const restartCommandValidator = (inputString) => {
 
 export {
   lottoNumberValidator,
+  bonusNumberValidator,
   purchaseAmountValidator,
   restartCommandValidator,
   ValidateError,

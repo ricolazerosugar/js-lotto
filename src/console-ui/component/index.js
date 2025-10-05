@@ -1,6 +1,7 @@
 import {
   purchaseAmountValidator,
   lottoNumberValidator,
+  bonusNumberValidator,
   restartCommandValidator,
 } from "../validator/index.js";
 import { ValidateError } from "../errors/index.js";
@@ -50,7 +51,7 @@ const bonusNumberComponent = async (store) => {
     const bonusNumberString = await inputStringWithPlaceholder(
       "> 보너스 번호를 입력해 주세요. "
     );
-    const bonusNumber = lottoNumberValidator(bonusNumberString);
+    const bonusNumber = bonusNumberValidator(bonusNumberString);
     store.set("bonusNumber", bonusNumber);
   })(store);
 };
