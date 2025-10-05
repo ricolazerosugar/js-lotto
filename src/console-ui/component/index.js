@@ -73,11 +73,12 @@ const winningReportComponent = async (store) => {
   console.log("--------------------");
 
   prizeList.forEach((prizeTarget) => {
-    const { matchedNumberCount, matchedBonusNumberCount, prize } = prizeTarget;
     console.log(
-      `${matchedNumberCount}개 일치${
-        matchedBonusNumberCount > 0 ? ", 보너스 볼 일치" : ""
-      } (${prize}원) - ${reportInfo.matched.get(prizeTarget) || 0}개`
+      `${prizeTarget.matchedNumberCount}개 일치${
+        prizeTarget.matchedBonusNumberCount > 0 ? ", 보너스 볼 일치" : ""
+      } (${prizeTarget.prize}원) - ${
+        reportInfo.matched.get(prizeTarget) || 0
+      }개`
     );
   });
 

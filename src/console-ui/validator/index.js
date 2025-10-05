@@ -1,18 +1,6 @@
 import lotto from "../../lotto/lotto.js";
 import { ValidateError } from "../errors/index.js";
 
-const positiveIntegerValidator = (inputString) => {
-  try {
-    const validatedValue = parseInt(inputString);
-    if (isNaN(purchaseAmount) || purchaseAmount <= 0) {
-      throw new ValidateError("invalid value: 올바르지 않은 값 입니다.");
-    }
-    return validatedValue;
-  } catch (error) {
-    throw error;
-  }
-};
-
 const lottoNumberValidator = (inputString) => {
   try {
     const validatedValue = inputString
@@ -52,7 +40,6 @@ const restartCommandValidator = (inputString) => {
 };
 
 export {
-  positiveIntegerValidator,
   lottoNumberValidator,
   purchaseAmountValidator,
   restartCommandValidator,

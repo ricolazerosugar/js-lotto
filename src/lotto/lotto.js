@@ -165,15 +165,13 @@ class LottoResultEvaluator {
   }
 
   static getPrize(winningLotto, lotto) {
-    const matchedNumberCount = winningLotto
-      .getNumbers()
-      .filter((number) => lotto.getNumbers().includes(number)).length;
-    const matchedBonusNumberCount = winningLotto
-      .getBonusNumber()
-      .filter((number) => lotto.getNumbers().includes(number)).length;
+    const lottoMatchResult = LottoResultEvaluator.getMatchResult(
+      winningLotto,
+      lotto
+    );
 
     return LottoResultEvaluator.PRIZE_MAP[
-      `${matchedNumberCount}:${matchedBonusNumberCount}`
+      `${lottoMatchResult.getMatchedNumberCount()}:${lottoMatchResult.getMatchedBonusNumberCount()}`
     ];
   }
 
