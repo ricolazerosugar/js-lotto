@@ -1,11 +1,5 @@
 import lotto from "../../lotto/lotto.js";
-
-class ValidateError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ValidateError";
-  }
-}
+import { ValidateError } from "../errors/index.js";
 
 const positiveIntegerValidator = (inputString) => {
   try {
